@@ -2,10 +2,37 @@
 ## functions do
 
 ## Write a short comment describing this function
-#eee
+#makeCacheMatrix stocke en mémoire et restitue 
+# l'inverse d'une matrice 
 makeCacheMatrix <- function(x = matrix()) {
-
+  
+  inverse <- NULL # variable pointant ssur la matrice inverse
+  
+  get <- function () {
+    x
+  }
+  
+  set <- function (mat) {
+    inverse <<- NULL
+    x <<- mat
+  }
+  
+  getinv <- function() {
+    inverse
+  }
+  
+  setinv <- function(mat) {
+    inverse <<- mat
+  }
+  
+  list(get = get
+       , set = set
+       , getinv = getinv
+       , setinv = setinv
+       )
+  
 }
+
 
 
 ## Write a short comment describing this function
