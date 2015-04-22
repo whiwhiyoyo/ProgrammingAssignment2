@@ -6,23 +6,23 @@
 # l'inverse d'une matrice 
 makeCacheMatrix <- function(x = matrix()) {
   
-  inverse <- NULL # variable pointant ssur la matrice inverse
+  m <- NULL # variable pointant ssur la matrice inverse
   
   get <- function () {
     x
   }
   
   set <- function (mat) {
-    inverse <<- NULL
+    m <<- NULL
     x <<- mat
   }
   
   getinv <- function() {
-    inverse
+    m
   }
   
   setinv <- function(mat) {
-    inverse <<- mat
+    m <<- mat
   }
   
   list(get = get
@@ -34,9 +34,18 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-
 ## Write a short comment describing this function
-
+# cacheSolve verifie si l'inverse a déjà été calculé.
+# si l'inverse n'est pas renseigné, la fonction relance le calcul.
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
+  m <- x$getinv()
+  if(!is.null(m)) {
+    message("getting cached data")
+    return(m)
+  }
+  data <- x$get()
+  m <- solve(data, ...)
+  x$setinv(m)
+  m
 }
